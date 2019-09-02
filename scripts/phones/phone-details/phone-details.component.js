@@ -1,6 +1,16 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
-export class PhoneDetailsComponent extends BaseComponent{
+// import {PhonesComponent} from "../phones.component.js";
+
+export class PhoneDetailsComponent extends BaseComponent {
+    // constructor(element) {
+    //     super(element);
+    //     this._element.querySelector('.back').addEventListener('click', this.hide);
+    // }
+    //
+    // hide() {
+    //     super.hide();
+    // }
 
     show(phone) {
         this._phone = phone;
@@ -14,7 +24,7 @@ export class PhoneDetailsComponent extends BaseComponent{
 
     <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
 
-    <button>Back</button>
+    <button class="back">Back</button>
     <button>Add to basket</button>
 
 
