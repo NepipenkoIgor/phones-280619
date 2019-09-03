@@ -1,18 +1,29 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhonesCatalogComponent  extends BaseComponent {
-    constructor({element, phones, onPhoneSelect}) {
-        super({element})
+    constructor({element, phones, onPhoneSelect, onAdd, onRemove}) {
+        super({element});
         this._phones = phones;
         this._onPhoneSelect = onPhoneSelect;
+        this._onAdd = onAdd;
+        this._onRemove = onRemove;
         this._render();
         this._element.addEventListener('click', (e) => {
             let phoneEl = e.target.closest('.phone');
+            if (e.target.classList.contains('phone-add')) {
+                this._onAdd(phoneEl.dataset.phoneId);
+                return;
+            }
+            if (e.target.classList.contains('phone-remove')) {
+                this._onRemove(phoneEl.dataset.phoneId);
+                return;
+            }
+            // debugger;
             if (!phoneEl) {
                 return;
             }
             this._onPhoneSelect(phoneEl.dataset.phoneId);
-        })
+        });
     }
 
     _render() {
@@ -25,9 +36,16 @@ export class PhonesCatalogComponent  extends BaseComponent {
                     </a>
 
                     <div class="phones__btn-buy-wrapper">
-                        <a class="btn btn-success">
+                        <a class="btn btn-success phone-add">
                             Add
-                        </a>
+                        </a>  
+                
+                    </div>  
+                    <div class="phones__btn-buy-wrapper">
+                        <a class="btn btn-success phone-remove">
+                            Remove
+                        </a>  
+                
                     </div>
 
                     <a href="#!/phones/${phone.id}">${phone.name}</a>
