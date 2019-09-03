@@ -1,6 +1,7 @@
 import {PhonesCatalogComponent} from './phones-catalog/phones-catalog.component.js'
 import {PhoneDetailsComponent} from './phone-details/phone-details.component.js'
 import {PhonesService} from './phones.service.js'
+import {ShoppingCartComponent} from "./shopping-cart/shoppingCart.component.js";
 export class PhonesComponent {
     constructor({element}) {
         this._element = element;
@@ -16,6 +17,9 @@ export class PhonesComponent {
         });
         this._details = new PhoneDetailsComponent({
             element: this._element.querySelector('.phone-details')
+        });
+        this._shoppingCart = new ShoppingCartComponent({
+            element: this._element.querySelector('.shopping-cart')
         });
     }
 
@@ -40,14 +44,7 @@ export class PhonesComponent {
                 </p>
             </section>
 
-            <section>
-                <p>Shopping Cart</p>
-                <ul>
-                    <li>Phone 1</li>
-                    <li>Phone 2</li>
-                    <li>Phone 3</li>
-                </ul>
-            </section>
+            <section class="shopping-cart"></section>
         </div>
 
         <!--Main content-->
