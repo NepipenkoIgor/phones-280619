@@ -1,10 +1,20 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
+
 export class PhoneDetailsComponent extends BaseComponent{
+    constructor({element, onBack, onAdd}) {
+        super({element});
+        this._onBack = onBack;
+        this._onAdd = onAdd;
+    }
 
     show(phone) {
         this._phone = phone;
         this._render();
+        this._element.querySelector('.btn-back').addEventListener('click', this._onBack);
+        this._element.querySelector('.phone-add').addEventListener('click', (e) =>{
+            this._onAdd(phone.id);
+        });
         super.show();
     }
 
@@ -12,34 +22,34 @@ export class PhoneDetailsComponent extends BaseComponent{
         this._element.innerHTML = `
           <div>
 
-    <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
+    <img class="phone" src="img/phones/${this._phone.id}.0.jpg">
 
-    <button>Back</button>
-    <button>Add to basket</button>
+    <button class="btn-back">Back</button>
+    <button class="phone-add">Add to basket</button>
 
 
-    <h1>Motorola XOOM™ with Wi-Fi</h1>
+    <h1>${this._phone.name}</h1>
 
-    <p>Motorola XOOM with Wi-Fi has a super-powerful dual-core processor and Android™ 3.0 (Honeycomb) — the Android platform designed specifically for tablets. With its 10.1-inch HD widescreen display, you’ll enjoy HD video in a thin, light, powerful and upgradeable tablet.</p>
+    <p>${this._phone.snippet}</p>
 
     <ul class="phone-thumbs">
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
+        <img src="img/phones/${this._phone.id}.0.jpg">
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.1.jpg">
+        <img src="img/phones/${this._phone.id}.1.jpg">
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.2.jpg">
+        <img src="img/phones/${this._phone.id}.2.jpg">
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.3.jpg">
+        <img src="img/phones/${this._phone.id}.3.jpg">
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.4.jpg">
+        <img src="img/phones/${this._phone.id}.4.jpg">
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.5.jpg">
+        <img src="img/phones/${this._phone.id}.5.jpg">
       </li>
     </ul>
   </div>

@@ -1,6 +1,9 @@
 import {PhonesCatalogComponent} from './phones-catalog/phones-catalog.component.js'
 import {PhoneDetailsComponent} from './phone-details/phone-details.component.js'
 import {PhonesService} from './phones.service.js'
+import {BaseComponent} from "../shared/componets/base.component.js";
+import {BasketComponent} from "../basket/basket.component.js";
+
 export class PhonesComponent {
     constructor({element}) {
         this._element = element;
@@ -12,11 +15,25 @@ export class PhonesComponent {
                 const phonesDetails = PhonesService.getOneById(phoneId);
                 this._catalog.hide();
                 this._details.show(phonesDetails);
+            },
+            onAdd : (phone) => {
+                this._basket.addPhone(PhonesService.getOneById(phone));
+            },
+            onRemove : (phone) => {
+                this._basket.removePhone(PhonesService.getOneById(phone));
             }
         });
         this._details = new PhoneDetailsComponent({
-            element: this._element.querySelector('.phone-details')
+            element: this._element.querySelector('.phone-details'),
+            onBack : () => {
+                this._catalog.show();
+                this._details.hide();
+            },
+            onAdd : (phone) => {
+                this._basket.addPhone(PhonesService.getOneById(phone));
+            }
         });
+        this._basket = new BasketComponent({element :this._element.querySelector('.basket')});
     }
 
     _render() {
@@ -40,13 +57,13 @@ export class PhonesComponent {
                 </p>
             </section>
 
-            <section>
-                <p>Shopping Cart</p>
+            <section class="basket">
+<!--                <p>Shopping Cart</p>
                 <ul>
                     <li>Phone 1</li>
                     <li>Phone 2</li>
                     <li>Phone 3</li>
-                </ul>
+                </ul>-->
             </section>
         </div>
 
