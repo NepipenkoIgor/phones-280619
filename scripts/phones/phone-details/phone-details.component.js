@@ -1,24 +1,19 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
-// import {PhonesComponent} from "../phones.component.js";
-
 export class PhoneDetailsComponent extends BaseComponent {
-    // constructor(element) {
-    //     super(element);
-    //     this._element.querySelector('.back').addEventListener('click', this.hide);
-    // }
-    //
-    // hide() {
-    //     super.hide();
-    // }
 
     show(phone) {
         this._phone = phone;
+        this.adaptElementImageUrl = this._phone.imageUrl.slice(0, -5);
         this._render();
         super.show();
+        this._element.querySelector('.back').addEventListener('click', function () {
+            location.reload();
+        });
     }
 
-    _render() {                                             // TODO render right images
+
+    _render() {                                // render only 3 img because not all element have 6
         this._element.innerHTML = `
           <div>
 
@@ -34,26 +29,28 @@ export class PhoneDetailsComponent extends BaseComponent {
 
     <ul class="phone-thumbs">
       <li>
-        <img src="${this._phone.imageUrl}">
+        <img src="${this.adaptElementImageUrl}0.jpg">
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.1.jpg"> 
+        <img src="${this.adaptElementImageUrl}1.jpg"> 
       </li>
       <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.2.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.3.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.4.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.5.jpg">
+        <img src="${this.adaptElementImageUrl}2.jpg">
       </li>
     </ul>
+    
   </div>
         `
     }
 
 }
+
+// <li>
+// <img src="${this.adaptElementImageUrl}3.jpg">
+//     </li>
+//     <li>
+//     <img src="${this.adaptElementImageUrl}4.jpg">
+//     </li>
+//     <li>
+//     <img src="${this.adaptElementImageUrl}5.jpg">
+//     </li>
