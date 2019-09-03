@@ -1,46 +1,49 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
-export class PhoneDetailsComponent extends BaseComponent{
+export class PhoneDetailsComponent extends BaseComponent {
 
-    show(phone) {
-        this._phone = phone;
+    constructor({element}) {
+        super({element});
+        this.on('click', '.thumb', (e) => {
+            this._currentImg.src = e.delegateTarget.src;
+        });
+        this.on('click', '.add', (e) => {
+            this.emitEvent('add-to-cart', this._phone.id)
+        });
+        this.on('click', '.back', (e) => {
+            this.emitEvent('back')
+        });
+    }
+
+    show(phoneDetails) {
+        this._phone = phoneDetails;
         this._render();
+        this._currentImg = this._element.querySelector('.phone');
+        [this._currentImg.src] = this._phone.images;
         super.show();
     }
 
     _render() {
+        const {name, description, images} = this._phone;
         this._element.innerHTML = `
           <div>
 
-    <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
+    <img class="phone">
 
-    <button>Back</button>
-    <button>Add to basket</button>
+    <button class="back">Back</button>
+    <button class="add" >Add to basket</button>
 
 
-    <h1>Motorola XOOM™ with Wi-Fi</h1>
+    <h1>${name}</h1>
 
-    <p>Motorola XOOM with Wi-Fi has a super-powerful dual-core processor and Android™ 3.0 (Honeycomb) — the Android platform designed specifically for tablets. With its 10.1-inch HD widescreen display, you’ll enjoy HD video in a thin, light, powerful and upgradeable tablet.</p>
+    <p>${description}</p>
 
     <ul class="phone-thumbs">
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
+    ${images.map((src) => `
+         <li>
+        <img src=${src} class="thumb">
       </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.1.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.2.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.3.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.4.jpg">
-      </li>
-      <li>
-        <img src="img/phones/motorola-xoom-with-wi-fi.5.jpg">
-      </li>
+    `).join('')}
     </ul>
   </div>
         `

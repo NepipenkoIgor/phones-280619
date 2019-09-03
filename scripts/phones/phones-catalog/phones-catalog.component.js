@@ -1,17 +1,18 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
+import {PhonesService} from "../phones.service.js";
 
-export class PhonesCatalogComponent  extends BaseComponent {
-    constructor({element, phones, onPhoneSelect}) {
-        super({element})
+export const phones = PhonesService.getAll();
+
+export class PhonesCatalogComponent extends BaseComponent {
+    constructor({element, phones}) {
+        super({element});
         this._phones = phones;
-        this._onPhoneSelect = onPhoneSelect;
         this._render();
-        this._element.addEventListener('click', (e) => {
-            let phoneEl = e.target.closest('.phone');
-            if (!phoneEl) {
-                return;
-            }
-            this._onPhoneSelect(phoneEl.dataset.phoneId);
+        this.on('click', '.phone', (e) => {
+            this.emitEvent('phone-select', e.delegateTarget.dataset.phoneId)
+        });
+        this.on('click', '.add-to-cart', (e) => {
+            this.emitEvent('add-to-cart', e.delegateTarget.dataset.phoneId)
         })
     }
 
@@ -19,12 +20,12 @@ export class PhonesCatalogComponent  extends BaseComponent {
         this._element.innerHTML = `
                     <ul class="phones">
                  ${this._phones.map((phone) => `
-               <li class="thumbnail phone" data-phone-id=${phone.id}>
+               <li class="thumbnail">
                     <a href="#!/phones/${phone.id}" class="thumb">
-                        <img alt="${phone.name}" src="${phone.imageUrl}">
+                        <img class="phone" alt="${phone.name}" data-phone-id=${phone.id} src="${phone.imageUrl}">
                     </a>
 
-                    <div class="phones__btn-buy-wrapper">
+                    <div class="phones__btn-buy-wrapper add-to-cart" data-phone-id=${phone.id}>
                         <a class="btn btn-success">
                             Add
                         </a>
