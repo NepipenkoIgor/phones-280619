@@ -162,6 +162,6 @@ export const PhonesService = new class {
     }
 
     getOneById(id) {
-        return {};
+        return  mockPhones.find((item) => item.id === id);
     }
 };
