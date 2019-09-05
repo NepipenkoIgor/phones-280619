@@ -6,6 +6,7 @@ export class PhonesComponent {
     constructor({element}) {
         this._element = element;
         this._render();
+        this.basket = {};
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
             phones: PhonesService.getAll(),
@@ -16,10 +17,17 @@ export class PhonesComponent {
             }
         });
         this._details = new PhoneDetailsComponent({
-            element: this._element.querySelector('.phone-details')
+            element: this._element.querySelector('.phone-details'),
+            backButtonSelect: () => {
+                this._catalog.show();
+                this._details.hide();
+            }
         });
         this._shoppingCart = new ShoppingCartComponent({
-            element: this._element.querySelector('.shopping-cart')
+            element: this._element.querySelector('.shopping-cart'),
+            addToBasket: (phoneId) => {
+
+            }
         });
     }
 

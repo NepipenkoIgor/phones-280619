@@ -1,15 +1,25 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhoneDetailsComponent extends BaseComponent {
+    constructor({element, backButtonSelect, addToBasket}) {
+        super({element});
+        this._backButtonSelect = backButtonSelect;
+        this._addToBasket = addToBasket;
+
+    }
 
     show(phone) {
         this._phone = phone;
         this.adaptElementImageUrl = this._phone.imageUrl.slice(0, -5);
         this._render();
         super.show();
-        this._element.querySelector('.back').addEventListener('click', function () {
-            location.reload();
+        this._element.querySelector('.back').addEventListener('click', (e) => {
+            this._backButtonSelect();
         });
+        this._element.querySelector('.basket').addEventListener('click', (e) => {
+            // let phone
+            this._addToBasket(this._phone.id);
+        })
     }
 
 
@@ -18,7 +28,7 @@ export class PhoneDetailsComponent extends BaseComponent {
   <div>
     <img class="phone" src="${this._phone.imageUrl}">
     <button class="back">Back</button>
-    <button>Add to basket</button>
+    <button class="basket">Add to basket</button>
     <h1>${this._phone.name}</h1>
     <p>${this._phone.snippet}</p>
     <ul class="phone-thumbs">
