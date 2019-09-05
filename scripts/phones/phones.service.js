@@ -159,7 +159,7 @@ export const PhonesService = new class {
     getAll() {
         // http
         return mockPhones;
-    }
+    }   
 
     getOneById(id) {
         return  mockPhones.find((item) => item.id === id);

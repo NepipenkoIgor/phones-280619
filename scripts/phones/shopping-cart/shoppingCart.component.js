@@ -1,9 +1,10 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class ShoppingCartComponent extends BaseComponent{
-    constructor({element, phone}) {
+    constructor({element, addToBasket, phoneid}) {
         super({element});
-        this._phone = phone;
+        this._addToBasket = addToBasket;
+        this._phone = phoneid;
         this._render();
     }
 
