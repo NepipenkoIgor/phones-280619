@@ -2,7 +2,7 @@ import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhoneDetailsComponent extends BaseComponent {
 
-    constructor({element}) {
+    constructor({element, cb}) {
         super({element});
         this.on('click', '.thumb', (e) => {
             this._currentImg.src = e.delegateTarget.src;
@@ -11,6 +11,7 @@ export class PhoneDetailsComponent extends BaseComponent {
             this.emitEvent('add-to-cart', this._phone.id)
         });
         this.on('click', '.back', (e) => {
+            cb();
             this.emitEvent('back')
         });
     }

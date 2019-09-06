@@ -4,16 +4,21 @@ import {PhonesService} from "../phones.service.js";
 export const phones = PhonesService.getAll();
 
 export class PhonesCatalogComponent extends BaseComponent {
-    constructor({element, phones}) {
+    constructor({element}) {
         super({element});
-        this._phones = phones;
-        this._render();
+        this._phones = [];
         this.on('click', '.phone', (e) => {
             this.emitEvent('phone-select', e.delegateTarget.dataset.phoneId)
         });
         this.on('click', '.add-to-cart', (e) => {
             this.emitEvent('add-to-cart', e.delegateTarget.dataset.phoneId)
         })
+    }
+
+    show(phones) {
+        this._phones = phones;
+        this._render();
+        super.show();
     }
 
     _render() {
