@@ -16,6 +16,14 @@ export class PhoneDetailsComponent extends BaseComponent {
         this._element.querySelector('.back').addEventListener('click', (e) => {
             this._backButtonSelect();
         });
+        this._element.addEventListener('click' , (e) => {
+            let currentImg = e.target.closest('.phone-thumbs'); //TODO not li but ul!
+            if (!currentImg) {
+                return;
+            }
+            this._element.querySelector('.phone').src = currentImg.src;
+            console.log(currentImg);
+        });
         this._element.querySelector('.basket').addEventListener('click', (e) => {
             // let phone
             this._addToBasket(this._phone.id);

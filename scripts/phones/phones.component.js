@@ -2,11 +2,19 @@ import {PhonesCatalogComponent} from './phones-catalog/phones-catalog.component.
 import {PhoneDetailsComponent} from './phone-details/phone-details.component.js'
 import {PhonesService} from './phones.service.js'
 import {ShoppingCartComponent} from "./shopping-cart/shoppingCart.component.js";
+
 export class PhonesComponent {
     constructor({element}) {
         this._element = element;
         this._render();
         this.basket = {};
+        this._initCatalog();
+        this._initDetails();
+        this._initCart();
+
+    }
+
+    _initCatalog() {
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
             phones: PhonesService.getAll(),
@@ -16,6 +24,9 @@ export class PhonesComponent {
                 this._details.show(phonesDetails);
             }
         });
+    }
+
+    _initDetails() {
         this._details = new PhoneDetailsComponent({
             element: this._element.querySelector('.phone-details'),
             backButtonSelect: () => {
@@ -23,6 +34,9 @@ export class PhonesComponent {
                 this._details.hide();
             }
         });
+    }
+
+    _initCart() {
         this._shoppingCart = new ShoppingCartComponent({
             element: this._element.querySelector('.shopping-cart'),
             addToBasket: (phoneId) => {
