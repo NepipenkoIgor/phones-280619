@@ -17,16 +17,16 @@ export class PhoneDetailsComponent extends BaseComponent {
             this._backButtonSelect();
         });
         this._element.addEventListener('click' , (e) => {
-            let currentImg = e.target.closest('.phone-thumbs'); //TODO not li but ul!
+            let currentImg = e.target.closest('.phone-thumbs li img');
             if (!currentImg) {
                 return;
             }
             this._element.querySelector('.phone').src = currentImg.src;
-            console.log(currentImg);
+            console.log(currentImg);                                        // TODO cleAn
         });
         this._element.querySelector('.basket').addEventListener('click', (e) => {
             // let phone
-            this._addToBasket(this._phone.id);
+            this._addToBasket(this._phone.name);
         })
     }
 

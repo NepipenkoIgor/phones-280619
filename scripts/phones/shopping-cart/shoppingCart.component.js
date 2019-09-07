@@ -8,11 +8,11 @@ export class ShoppingCartComponent extends BaseComponent{
         this._render();
     }
 
-    _render() {
+    _render() {                             // TODO its a map
         this._element.innerHTML = `
             <p>Shopping Cart</p>
                 <ul class="inCart">
-                    <li>Phone 1</li>
+                    <li>Phone 1</li>   
                     <li>Phone 2</li>
                     <li>Phone 3</li>
                 </ul>

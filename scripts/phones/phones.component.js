@@ -39,7 +39,11 @@ export class PhonesComponent {
     _initCart() {
         this._shoppingCart = new ShoppingCartComponent({
             element: this._element.querySelector('.shopping-cart'),
-            addToBasket: (phoneId) => {
+            addToBasket: (phone) => {
+                if (phone in this.basket) {
+                    phoneId.quantity = 0;
+                }
+                phoneId.quantity += 1;
 
             }
         });
