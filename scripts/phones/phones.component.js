@@ -7,7 +7,6 @@ export class PhonesComponent {
     constructor({element}) {
         this._element = element;
         this._render();
-        this.basket = {};
         this._initCatalog();
         this._initDetails();
         this._initCart();
@@ -32,17 +31,16 @@ export class PhonesComponent {
             backButtonSelect: () => {
                 this._catalog.show();
                 this._details.hide();
+            },
+            addToBasket: (phoneid) => {
+                this._shoppingCart.add(phoneid);
             }
-            // addToBasket: (phoneid) => {
-            //     console.log(phoneid);
-            // }
         });
     }
 
     _initCart() {
         this._shoppingCart = new ShoppingCartComponent({
-            element: this._element.querySelector('.shopping-cart'),
-
+            element: this._element.querySelector('.shopping-cart')
         });
     }
 
