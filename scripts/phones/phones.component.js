@@ -2,32 +2,47 @@ import {PhonesCatalogComponent} from './phones-catalog/phones-catalog.component.
 import {PhoneDetailsComponent} from './phone-details/phone-details.component.js'
 import {PhonesService} from './phones.service.js'
 import {ShoppingCartComponent} from "./shopping-cart/shoppingCart.component.js";
+
 export class PhonesComponent {
     constructor({element}) {
         this._element = element;
         this._render();
         this.basket = {};
+        this._initCatalog();
+        this._initDetails();
+        this._initCart();
+
+    }
+
+    _initCatalog() {
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
             phones: PhonesService.getAll(),
-            onPhoneSelect: (phoneId) => {
-                const phonesDetails = PhonesService.getOneById(phoneId);
+            onPhoneSelect: (phoneid) => {
+                const phonesDetails = PhonesService.getOneById(phoneid);
                 this._catalog.hide();
                 this._details.show(phonesDetails);
             }
         });
+    }
+
+    _initDetails() {
         this._details = new PhoneDetailsComponent({
             element: this._element.querySelector('.phone-details'),
             backButtonSelect: () => {
                 this._catalog.show();
                 this._details.hide();
             }
+            // addToBasket: (phoneid) => {
+            //     console.log(phoneid);
+            // }
         });
+    }
+
+    _initCart() {
         this._shoppingCart = new ShoppingCartComponent({
             element: this._element.querySelector('.shopping-cart'),
-            addToBasket: (phoneId) => {
 
-            }
         });
     }
 
