@@ -1,9 +1,8 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhoneDetailsComponent extends BaseComponent {
-    constructor({element, backButtonSelect, addToBasket, phoneid}) {
+    constructor({element, backButtonSelect, addToBasket}) {
         super({element});
-        // this._phone = phoneid;
         this._backButtonSelect = backButtonSelect;
         this._addToBasket = addToBasket;
     }
@@ -14,7 +13,7 @@ export class PhoneDetailsComponent extends BaseComponent {
         this._render();
         super.show();
         this._element.querySelector('.back').addEventListener('click', (e) => {
-            this._backButtonSelect();
+            return this._backButtonSelect();
         });
         this._element.addEventListener('click' , (e) => {
             let currentImg = e.target.closest('.phone-thumbs li img');
@@ -22,10 +21,12 @@ export class PhoneDetailsComponent extends BaseComponent {
                 return;
             }
             this._element.querySelector('.phone').src = currentImg.src;
+            return;
         });
         this._element.querySelector('.basket').addEventListener('click', (e) => {
             // let phone
-            this._addToBasket(this._phone.id);  // TODO not a function
+            this._addToBasket(this._phone.id);
+            return;
         })
     }
 
@@ -122,12 +123,3 @@ export class PhoneDetailsComponent extends BaseComponent {
 
 }
 
-// <li>
-// <img src="${this.adaptElementImageUrl}3.jpg">
-//     </li>
-//     <li>
-//     <img src="${this.adaptElementImageUrl}4.jpg">
-//     </li>
-//     <li>
-//     <img src="${this.adaptElementImageUrl}5.jpg">
-//     </li>
