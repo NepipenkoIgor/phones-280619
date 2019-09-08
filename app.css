@@ -106,6 +106,10 @@ h1 {
   border-bottom: 1px solid gray;
 }
 
-.remove:hover {
-  cursor: hand;
+/*.remove:hover {*/
+/*  cursor: hand;*/
+/*}*/
+
+.cursor-pointer{
+  cursor: pointer;
 }

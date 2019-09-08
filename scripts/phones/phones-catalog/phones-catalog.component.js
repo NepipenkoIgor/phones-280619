@@ -1,17 +1,22 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhonesCatalogComponent  extends BaseComponent {
-    constructor({element, phones, onPhoneSelect}) {
+    constructor({element, phones, onPhoneSelect, addToBasket}) {
         super({element});
         this._phones = phones;
         this._onPhoneSelect = onPhoneSelect;
+        this._addToBasket = addToBasket;
         this._render();
         this._element.addEventListener('click', (e) => {
             let phoneEl = e.target.closest('.phone');
-            if (!phoneEl) {
-                return;
+            let toCart = e.target.closest('.addToCart');   // TODO else dont work
+            if (phoneEl) {
+                return this._onPhoneSelect(phoneEl.dataset.phoneId);
             }
-            this._onPhoneSelect(phoneEl.dataset.phoneId);
+            if (toCart) {
+                return this._addToBasket(phoneEl.dataset.phoneId);
+            }
+
         })
     }
 
@@ -25,7 +30,7 @@ export class PhonesCatalogComponent  extends BaseComponent {
                     </a>
 
                     <div class="phones__btn-buy-wrapper">
-                        <a class="btn btn-success">
+                        <a class="btn btn-success addToCart">
                             Add
                         </a>
                     </div>

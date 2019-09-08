@@ -21,6 +21,9 @@ export class PhonesComponent {
                 const phonesDetails = PhonesService.getOneById(phoneid);
                 this._catalog.hide();
                 this._details.show(phonesDetails);
+            },
+            addToBasket: (phoneid) => {
+                this._shoppingCart.add(phoneid);
             }
         });
     }
