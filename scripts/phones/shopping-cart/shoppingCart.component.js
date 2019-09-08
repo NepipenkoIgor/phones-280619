@@ -37,7 +37,7 @@ export class ShoppingCartComponent extends BaseComponent {
                 <ul class="inCart">
                 ${Object.entries(this.basket).map(([phoneid, count]) => `
                 <li>${phoneid} : ${count}</li>
-                <span class="badge badge-pill badge-danger remove" data-phone-id=${phoneid}>remove</span>
+                <span class="badge badge-pill badge-danger cursor-pointer remove" data-phone-id=${phoneid}>remove</span>
                 `).join('')}
                 </ul>
         `;
