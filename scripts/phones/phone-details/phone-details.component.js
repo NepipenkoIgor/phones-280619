@@ -1,15 +1,15 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhoneDetailsComponent extends BaseComponent {
-    constructor({element, backButtonSelect, addToBasket}) {
+    constructor({element, backButtonSelect, addToBasket, phoneid}) {
         super({element});
+        // this._phone = phoneid;
         this._backButtonSelect = backButtonSelect;
         this._addToBasket = addToBasket;
-
     }
 
-    show(phone) {
-        this._phone = phone;
+    show(phonesDetails) {
+        this._phone = phonesDetails;
         this.adaptElementImageUrl = this._phone.imageUrl.slice(0, -5);
         this._render();
         super.show();
@@ -22,11 +22,10 @@ export class PhoneDetailsComponent extends BaseComponent {
                 return;
             }
             this._element.querySelector('.phone').src = currentImg.src;
-            console.log(currentImg);                                        // TODO cleAn
         });
         this._element.querySelector('.basket').addEventListener('click', (e) => {
             // let phone
-            this._addToBasket(this._phone.name);
+            this._addToBasket(this._phone.id);  // TODO not a function
         })
     }
 

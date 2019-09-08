@@ -18,8 +18,8 @@ export class PhonesComponent {
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
             phones: PhonesService.getAll(),
-            onPhoneSelect: (phoneId) => {
-                const phonesDetails = PhonesService.getOneById(phoneId);
+            onPhoneSelect: (phoneid) => {
+                const phonesDetails = PhonesService.getOneById(phoneid);
                 this._catalog.hide();
                 this._details.show(phonesDetails);
             }
@@ -33,19 +33,16 @@ export class PhonesComponent {
                 this._catalog.show();
                 this._details.hide();
             }
+            // addToBasket: (phoneid) => {
+            //     console.log(phoneid);
+            // }
         });
     }
 
     _initCart() {
         this._shoppingCart = new ShoppingCartComponent({
             element: this._element.querySelector('.shopping-cart'),
-            addToBasket: (phone) => {
-                if (phone in this.basket) {
-                    phoneId.quantity = 0;
-                }
-                phoneId.quantity += 1;
 
-            }
         });
     }
 
