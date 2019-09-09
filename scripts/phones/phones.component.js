@@ -51,15 +51,16 @@ export class PhonesComponent {
 
     _initFilter() {
         this._filter = new FilterComponent({
-            element: this._element.querySelector('.filter')
-        }),
+            element: this._element.querySelector('.filter'),
             search: () => {
 
-        },
+            },
             change: () => {
 
-        }
+            }
+        });
     }
+
 
     _render() {
         this._element.innerHTML = `
