@@ -21,11 +21,15 @@ export class PhonesComponent {
 
         this._showFilteredPhones();
 
-        this._catalog.onEvent('phone-select', ({detail: phoneId}) => {
-            this._phoneId = phoneId;
-            const phonesDetails = PhonesService.getOneById(phoneId);
-            this._catalog.hide();
-            this._details.show(phonesDetails);
+        this._catalog.onEvent('phone-select', async ({detail: phoneId}) => {
+            try {
+                this._phoneId = phoneId;
+                const details = await PhonesService.getOneById(phoneId);
+                this._catalog.hide();
+                this._details.show(details);
+            } catch (err) {
+                console.log(err);
+            }
         });
         this._catalog.onEvent('add-to-cart', ({detail: phoneId}) => {
             this._cart.add(phoneId);
@@ -36,9 +40,6 @@ export class PhonesComponent {
     _initDetails() {
         this._details = new PhoneDetailsComponent({
             element: this._element.querySelector('.phone-details'),
-            cb: () => {
-                console.log(this)
-            }
         });
 
         this._details.onEvent('back', () => {

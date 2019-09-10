@@ -11,7 +11,6 @@ export class PhoneDetailsComponent extends BaseComponent {
             this.emitEvent('add-to-cart', this._phone.id)
         });
         this.on('click', '.back', (e) => {
-            cb();
             this.emitEvent('back')
         });
     }
