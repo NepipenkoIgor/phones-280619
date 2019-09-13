@@ -1,4 +1,5 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
+import template from './phone-detail.component.hbs'
 
 export class PhoneDetailsComponent extends BaseComponent {
 
@@ -24,29 +25,7 @@ export class PhoneDetailsComponent extends BaseComponent {
     }
 
     _render() {
-        const {name, description, images} = this._phone;
-        this._element.innerHTML = `
-          <div>
-
-    <img class="phone">
-
-    <button class="back">Back</button>
-    <button class="add" >Add to basket</button>
-
-
-    <h1>${name}</h1>
-
-    <p>${description}</p>
-
-    <ul class="phone-thumbs">
-    ${images.map((src) => `
-         <li>
-        <img src=${src} class="thumb">
-      </li>
-    `).join('')}
-    </ul>
-  </div>
-        `
+        this._element.innerHTML = template({phone: this._phone})
     }
 
 }

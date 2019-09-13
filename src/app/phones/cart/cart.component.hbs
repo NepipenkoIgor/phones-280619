@@ -1,0 +1,7 @@
+<p>Shopping Cart</p>
+<ul>
+    {{#each phones}}
+        <li>{{@key}} - {{this}}</li>
+        <button class="remove" data-phone-id={{@key}}>x</button>
+    {{/each}}
+</ul>
