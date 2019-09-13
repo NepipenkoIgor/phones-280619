@@ -1,3 +1,6 @@
+console.log(__dirname)
+console.log(process.cwd())
+
 const p1 = new Promise((res, rej) => {
     setTimeout(() => {
         res('JavaScript');
@@ -5,7 +8,7 @@ const p1 = new Promise((res, rej) => {
 });
 const p2 = new Promise((res, rej) => {
     setTimeout(() => {
-        rej('NodeJS');
+        res('NodeJS');
     }, 4000)
 });
 const p3 = new Promise((res, rej) => {
@@ -15,6 +18,7 @@ const p3 = new Promise((res, rej) => {
 });
 
 
+manageData().then((data)=>console.log(data))
 async function manageData() {
     try {
         const js = await p1;
