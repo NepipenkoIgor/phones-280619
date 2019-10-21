@@ -1,5 +1,5 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
-
+import template from './filter.component.hbs';
 export class FilterComponent extends BaseComponent {
     constructor({element}) {
         super({element});
@@ -13,19 +13,6 @@ export class FilterComponent extends BaseComponent {
     }
 
     _render() {
-        this._element.innerHTML = `
-                <p>
-                    Search:
-                    <input class="search">
-                </p>
-
-                <p>
-                    Sort by:
-                    <select class="sort">
-                        <option value="name">Alphabetical</option>
-                        <option value="age">Newest</option>
-                    </select>
-                </p>
-        `
+        this._element.innerHTML = template()
     }
 }

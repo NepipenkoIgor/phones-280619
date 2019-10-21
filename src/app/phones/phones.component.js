@@ -3,6 +3,7 @@ import {PhoneDetailsComponent} from './phone-details/phone-details.component.js'
 import {FilterComponent} from './filter/filter.component.js';
 import {CartComponent} from './cart/cart.component.js';
 import {PhonesService} from './phones.service.js'
+import template from './phones.component.hbs';
 
 export class PhonesComponent {
     constructor({element}) {
@@ -18,7 +19,6 @@ export class PhonesComponent {
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog')
         });
-
         this._showFilteredPhones();
 
         this._catalog.onEvent('phone-select', async ({detail: phoneId}) => {
@@ -77,26 +77,7 @@ export class PhonesComponent {
     }
 
     _render() {
-        this._element.innerHTML = `
-            <div class="row">
-
-        <!--Sidebar-->
-        <div class="col-md-2">
-            <section class="phones-filter">
-              
-            </section >
-
-            <section class='cart'>
-            
-            </section>
-        </div>
-
-        <!--Main content-->
-        <div class="col-md-10">
-            <div class="phones-catalog"></div>
-            <div class="phone-details"></div>
-        </div>
-    </div>`
+        this._element.innerHTML = template();
     }
 
 }

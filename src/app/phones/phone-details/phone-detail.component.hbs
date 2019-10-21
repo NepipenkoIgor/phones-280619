@@ -1,0 +1,18 @@
+<div>
+    <img class="phone">
+
+    <button class="back">Back</button>
+    <button class="add">Add to basket</button>
+
+    <h1>{{phone.name}}</h1>
+
+    <p>{{phone.description}}</p>
+
+    <ul class="phone-thumbs">
+        {{#each phone.images}}
+            <li>
+                <img src={{this}} class="thumb">
+            </li>
+        {{/each}}
+    </ul>
+</div>
